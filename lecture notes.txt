@@ -1,0 +1,15 @@
+alt.Chart().mark_bar().encode(
+	alt.X(), 
+	alt.Y())
+
+
+alt.Chart(movies_url).mark_bar().encode(
+    alt.X('q1(Rotten_Tomatoes_Rating):Q'), # limit the bar on x axis
+    alt.X2('q3(Rotten_Tomatoes_Rating):Q'), # limit the bar on x axis
+    alt.Y('Major_Genre:N', sort=alt.EncodingSortField(
+        op='median', 
+	field='Rotten_Tomatoes_Rating', 
+	order='descending')
+    )
+)
+

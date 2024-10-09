@@ -1,4 +1,4 @@
----
+    ---
 title: "Visualization (Data Transformation)"
 author: "Peter Ganong and Maggie Shi"
 date: today
@@ -206,6 +206,13 @@ Hint: if you aren't sure how to aggregate the x-variable, go back to the first v
 
 3. *Share* -- discuss results as a class
 
+```{python}
+alt.Chart(movies_url).mark_area().encode(
+    alt.X('month(Release_Date):T'), # altair is super smart that it can detect date in string
+    # alt.Y('max(US_Gross):Q') # wrong method since you can only get one highest point
+    alt.Y('median(US_Gross):Q') # median helps aggregate and tackle outliers
+)
+```
 
 ## Aggregation: summary
 
