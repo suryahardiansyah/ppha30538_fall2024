@@ -293,6 +293,34 @@ Are penguins getting heavier (`body_mass_g`) over time?
 
 Bonus: what is the headline of your plot and what are the sub-messages?
 
+```{python}
+import altair as alt
+from palmerpenguins import load_penguins
+penguins = load_penguins()
+display(penguins)
+```
+
+```{python}
+alt.Chart(penguins).mark_bar().encode(
+    alt.X('year:O', bin=alt.BinParams(maxbins=20)),
+    alt.Y('body_mass_g:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Color('count()')
+) 
+```
+
+```{python}
+alt.Chart(penguins).mark_point().encode(
+    alt.X('year:O'),
+    alt.Y('body_mass_g:Q')
+) 
+```
+
+```{python}
+alt.Chart(penguins).mark_rect().encode(
+    alt.X('year:O', bin=alt.Bin(maxbins=70)), 
+    alt.Y('body_mass_g:Q', bin=alt.Bin(maxbins=70)),
+    alt.Color('count()', scale=alt.Scale(scheme='blues')))
+```
 ## Meta comment: iterating on plot design
 
 "Make dozens of plots" -- Quoctrung Bui, former 30535 guest lecturer and former Harris data viz instructor
@@ -302,4 +330,3 @@ What does he mean?
 * The first plot you make will never be the one you should show
 * As a rule of thumb, you should try out at least three different plotting concepts (`mark`s)
 * Within each concept, you will need to try out several different encodings
-
